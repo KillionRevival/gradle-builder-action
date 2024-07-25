@@ -22,6 +22,6 @@ runs:
     - name: Build with Maven
       id: build-step
       run: |
-         bash gradlew assemble
-         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*' >> $GITHUB_OUTPUT
+         /.gradlew assemble
+         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*') >> $GITHUB_OUTPUT
       shell: bash
