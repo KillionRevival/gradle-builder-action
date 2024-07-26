@@ -25,6 +25,7 @@ runs:
         mkdir -p ~/.gradle
         echo "gpr.user=${{ github.actor }}" >> ~/.gradle/gradle.properties
         echo "gpr.key=${{ github.token }}" >> ~/.gradle/gradle.properties
+      shell: bash
 
     - name: Build with Gradle
       id: build-step
