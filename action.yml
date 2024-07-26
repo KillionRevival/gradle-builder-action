@@ -20,22 +20,12 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: temurin
 
-    - name: Set environment variables
-      run: |
-        echo "STR_USERNAME=${{ github.actor }}" >> $GITHUB_ENV
-        echo "STR_PASSWORD=${{ github.token }}" >> $GITHUB_ENV
-      shell: bash
-
-    - name: Create or update gradle.properties in ~/.gradle
-      run: |
-        mkdir -p ~/.gradle
-        echo "gpr.user=${STR_USERNAME}" >> ~/.gradle/gradle.properties
-        echo "gpr.key=${STR_PASSWORD}" >> ~/.gradle/gradle.properties
-      shell: bash
-
     - name: Build with Gradle
       id: build-step
       run: |
          bash gradlew assemble
          echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
+      env:
+        - USERNAME: ${{ github.actor }}
+        - PASSWORD: ${{ github.token }}
