@@ -27,6 +27,10 @@ runs:
         echo "gpr.key=${{ github.token }}" >> ~/.gradle/gradle.properties
       shell: bash
 
+    - name: debug
+      run: cat ~/.gradle/gradle.properties
+      shell: bash
+
     - name: Build with Gradle
       id: build-step
       run: |
