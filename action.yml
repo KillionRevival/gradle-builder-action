@@ -23,9 +23,9 @@ runs:
     - name: Build with Gradle
       id: build-step
       run: |
-         bash gradlew assemble
-         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
+        bash gradlew assemble
+        echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
       env:
-        - USERNAME: ${{ github.actor }}
-        - PASSWORD: ${{ github.token }}
+        USERNAME: ${{ github.actor }}
+        PASSWORD: ${{ github.token }}
