@@ -7,11 +7,11 @@ inputs:
   java-distribution:
     default: "temurin"
     description: "Distribution of Java to use"
-  app_id:
-    description: App ID for auth
+  username:
+    description: username
     required: true
-  private_key:
-    description: Private key for auth
+  token:
+    description: pat token
     required: true
 outputs:
   jar-path:
@@ -29,13 +29,6 @@ runs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Get app token
-      id: get-token
-      uses: KillionRevival/app-token-action@v1
-      with:
-        app_id: ${{ inputs.app_id }}
-        private_key: ${{ inputs.private_key }}
-
     - name: Build with Gradle
       id: build-step
       run: |
@@ -43,5 +36,5 @@ runs:
         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
       env:
-        GITHUB_USERNAME: ${{ steps.get-token.outputs.user-id }}
-        GITHUB_TOKEN: ${{ steps.get-token.outputs.app-token }}
+        GITHUB_USERNAME: ${{ inputs.username }}
+        GITHUB_TOKEN: ${{ inputs.token }}
