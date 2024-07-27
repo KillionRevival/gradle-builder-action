@@ -43,5 +43,5 @@ runs:
         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
       env:
-        GITHUB_USERNAME: "x-access-token"
+        GITHUB_USERNAME: ${{ steps.get-token.outputs.user-id }}
         GITHUB_TOKEN: ${{ steps.get-token.outputs.app-token }}
