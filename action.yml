@@ -7,9 +7,6 @@ inputs:
   java-distribution:
     default: "temurin"
     description: "Distribution of Java to use"
-  username:
-    description: username
-    required: true
   token:
     description: pat token
     required: true
@@ -36,5 +33,5 @@ runs:
         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
       env:
-        GITHUB_USERNAME: ${{ inputs.username }}
+        GITHUB_USERNAME: ${{ github.actor }}
         GITHUB_TOKEN: ${{ inputs.token }}
