@@ -7,6 +7,12 @@ inputs:
   java-distribution:
     default: "temurin"
     description: "Distribution of Java to use"
+  app_id:
+    description: App ID for auth
+    required: true
+  private_key:
+    description: Private key for auth
+    required: true
 outputs:
   jar-path:
     description: "path of the built jar file"
@@ -26,6 +32,9 @@ runs:
     - name: Get app token
       id: get-token
       uses: KillionRevival/app-token-action@v1
+      with:
+        app_id: ${{ inputs.app_id }}
+        private_key: ${{ inputs.private_key }}
 
     - name: Build with Gradle
       id: build-step
@@ -35,4 +44,4 @@ runs:
       shell: bash
       env:
         GITHUB_USERNAME: "x-access-token"
-        GITHUB_TOKEN: ${{ steps.get-key.outputs.app-token }}
+        GITHUB_TOKEN: ${{ steps.get-token.outputs.app-token }}
