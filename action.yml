@@ -20,11 +20,9 @@ runs:
         java-version: ${{ inputs.java-version }}
         distribution: temurin
 
-    - name: Create or update gradle.properties in ~/.gradle
-      run: |
-        echo "gpr.user=${{ github.actor }}" >> gradle.properties
-        echo "gpr.key=${{ github.token }}" >> gradle.properties
-      shell: bash
+    - name: Get app token
+      id: get-token
+      uses: KillionRevival/app-token-action@v1
 
     - name: Build with Gradle
       id: build-step
@@ -32,3 +30,6 @@ runs:
         bash gradlew assemble
         echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
       shell: bash
+      env:
+        GITHUB_USERNAME: "x-access-token"
+        GITHUB_TOKEN: ${{ steps.get-key.outputs.app-token }}
