@@ -30,7 +30,7 @@ runs:
       id: build-step
       run: |
         bash gradlew assemble
-        echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*')" >> $GITHUB_OUTPUT
+        echo "jar-path=$(find ./build/libs -iname '*.jar' ! -iname '*-dev*' | paste -sd '!')" >> $GITHUB_OUTPUT
       shell: bash
       env:
         GITHUB_USERNAME: strenkml
