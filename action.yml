@@ -2,7 +2,7 @@ name: "Gradle Assemble"
 description: "Assembles a gradle project"
 inputs:
   java-version:
-    default: 17
+    default: 21
     description: "Version of Java to build with"
   java-distribution:
     default: "temurin"
